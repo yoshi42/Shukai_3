@@ -8,9 +8,9 @@
 #define LED_COUNT1 5
 #define LED_COUNT2 9
 
-int gr_bl_delay = 50;
-int wait1 = 2000;
-int wait2 = 3000;
+int gr_bl_delay = 30;
+int wait1 = 4000;
+int wait2 = 10000;
 
 int switcher = 0;
 
@@ -21,21 +21,99 @@ void setup() {
   strip.begin();           // Initialize NeoPixel object
   pinMode(2, INPUT_PULLUP);
   Serial.begin(9600);
+  Serial.println("Hello Shukai 3 project. For downloading a sketch - find yoshi42 GitHub account");
 }
 
 void loop()
 {
-  strip.clear();
-  strip.show();
-  program1();
-  strip.clear();
-  strip.show();
-  delay(5000);
-  
-  strip.clear();
-  strip.show();
-  program2();
-  delay(5000);
+program_main();
+}
+
+void program_main()
+{
+  //Serial.println(digitalRead(2));
+  if (digitalRead(2) == false && switcher == 0)
+  {
+    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
+    //strip.clear(); // Set all pixel colors to 'off'
+    for(int i=0; i<LED_COUNT1; i++) 
+    {
+      // Set the i-th LED to BLUE:
+      strip.setPixelColor(i, 255, 0, 0);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    delay(wait1);
+    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
+    {
+      // Set the i-th LED to BLUE:
+      strip.setPixelColor(i, 255, 0, 0);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    switcher = 1;
+    delay(wait2);
+  }
+
+  if (digitalRead(2) == false && switcher == 1)
+  {
+    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
+   // strip.clear(); // Set all pixel colors to 'off'
+    for(int i=0; i<LED_COUNT1; i++) 
+    {
+      // Set the i-th LED to GREEN:
+      strip.setPixelColor(i, 0, 0, 255);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    delay(wait1);
+    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
+    {
+      // Set the i-th LED to GREEN:
+      strip.setPixelColor(i, 0, 0, 255);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    switcher = 2;
+    delay(wait2);
+  }
+
+  if (digitalRead(2) == false && switcher == 2)
+  {
+    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
+    //strip.clear(); // Set all pixel colors to 'off'
+    for(int i=0; i<LED_COUNT1; i++) 
+    {
+      // Set the i-th LED to PURPLE:
+      strip.setPixelColor(i, 200, 255, 0);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    delay(wait1);
+    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
+    {
+      // Set the i-th LED to PURPLE:
+      strip.setPixelColor(i, 200, 255, 0);
+      strip.show();   // Send the updated pixel colors to the hardware.
+      delay(gr_bl_delay); // Pause before next pass through loop
+    }
+    switcher = 0;
+    delay(wait2);
+  }
+
+  else
+  {
+    //strip.clear(); // Set all pixel colors to 'off'
+    //strip.show();   // Send the updated pixel colors to the hardware.
+    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
+    for(int i=0; i<9; i++) 
+        {
+          // Set the i-th LED to white:
+          strip.setPixelColor(i, 30, 30, 30);
+          strip.show();   // Send the updated pixel colors to the hardware.
+          //delay(10); // Pause before next pass through loop
+        }
+  }
 }
 
 void program1()
@@ -205,97 +283,4 @@ void program2()
        }
     }
     delay(wait2);
-}
-
-void program_main()
-{
-  //Serial.println(digitalRead(2));
-  if (digitalRead(2) == false && switcher == 0)
-  {
-    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-    strip.clear(); // Set all pixel colors to 'off'
-    // The first NeoPixel in a strand is #0, second is 1, all the way up
-    // to the count of pixels minus one.
-    for(int i=0; i<LED_COUNT1; i++) 
-    {
-      // Set the i-th LED to BLUE:
-      strip.setPixelColor(i, 255, 0, 0);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    delay(wait1);
-    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
-    {
-      // Set the i-th LED to BLUE:
-      strip.setPixelColor(i, 255, 0, 0);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    switcher = 1;
-    delay(wait2);
-  }
-
-  if (digitalRead(2) == false && switcher == 1)
-  {
-    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-    strip.clear(); // Set all pixel colors to 'off'
-    // The first NeoPixel in a strand is #0, second is 1, all the way up
-    // to the count of pixels minus one.
-    for(int i=0; i<LED_COUNT1; i++) 
-    {
-      // Set the i-th LED to GREEN:
-      strip.setPixelColor(i, 0, 0, 255);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    delay(wait1);
-    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
-    {
-      // Set the i-th LED to GREEN:
-      strip.setPixelColor(i, 0, 0, 255);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    switcher = 2;
-    delay(wait2);
-  }
-
-  if (digitalRead(2) == false && switcher == 2)
-  {
-    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-    strip.clear(); // Set all pixel colors to 'off'
-    // The first NeoPixel in a strand is #0, second is 1, all the way up
-    // to the count of pixels minus one.
-    for(int i=0; i<LED_COUNT1; i++) 
-    {
-      // Set the i-th LED to PURPLE:
-      strip.setPixelColor(i, 200, 255, 0);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    delay(wait1);
-    for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
-    {
-      // Set the i-th LED to PURPLE:
-      strip.setPixelColor(i, 200, 255, 0);
-      strip.show();   // Send the updated pixel colors to the hardware.
-      delay(gr_bl_delay); // Pause before next pass through loop
-    }
-    switcher = 0;
-    delay(wait2);
-  }
-
-  else
-  {
-    //strip.clear(); // Set all pixel colors to 'off'
-    //strip.show();   // Send the updated pixel colors to the hardware.
-    strip.setBrightness(50); // Set BRIGHTNESS (max = 255)
-    for(int i=0; i<9; i++) 
-        {
-          // Set the i-th LED to white:
-          strip.setPixelColor(i, 128, 128, 128);
-          strip.show();   // Send the updated pixel colors to the hardware.
-          //delay(10); // Pause before next pass through loop
-        }
-  }
 }
