@@ -37,6 +37,7 @@ void program_main()
   if (digitalRead(2) == false && switcher == 0)
   {
     delay(20);
+    Serial.println("button pushed");
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
     //strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
@@ -46,6 +47,7 @@ void program_main()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    Serial.println("BLUE");
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -61,6 +63,7 @@ void program_main()
   if (digitalRead(2) == false && switcher == 1)
   {
     delay(20);
+    Serial.println("button pushed");
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
    // strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
@@ -70,6 +73,7 @@ void program_main()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    Serial.println("GREEN");
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -85,6 +89,7 @@ void program_main()
   if (digitalRead(2) == false && switcher == 2)
   {
     delay(20);
+    Serial.println("button pushed");
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
     //strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
@@ -94,6 +99,7 @@ void program_main()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    Serial.println("PURPLE");
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -124,12 +130,14 @@ void program_main()
 void program_main_analogue()
 {
   //Serial.println(digitalRead(2));
-  Serial.println(analogRead(BTN2_PIN));
+  //erial.println(analogRead(BTN2_PIN));
+  //delay(200);
   if (analogRead(BTN2_PIN) <= 500 && switcher == 0)
   {
     delay(20);
+    int temp = analogRead(BTN2_PIN);
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-    //strip.clear(); // Set all pixel colors to 'off'
+    strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
     {
       // Set the i-th LED to BLUE:
@@ -137,6 +145,8 @@ void program_main_analogue()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    //Serial.print("BLUE ");
+    //Serial.println(temp);
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -152,8 +162,9 @@ void program_main_analogue()
   if (analogRead(BTN2_PIN) <= 500 && switcher == 1)
   {
     delay(20);
+    int temp = analogRead(BTN2_PIN);
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-   // strip.clear(); // Set all pixel colors to 'off'
+    strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
     {
       // Set the i-th LED to GREEN:
@@ -161,6 +172,8 @@ void program_main_analogue()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    //Serial.print("GREEN ");
+    //Serial.println(temp);
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -176,8 +189,9 @@ void program_main_analogue()
   if (analogRead(BTN2_PIN) <= 500 && switcher == 2)
   {
     delay(20);
+    int temp = analogRead(BTN2_PIN);
     strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
-    //strip.clear(); // Set all pixel colors to 'off'
+    strip.clear(); // Set all pixel colors to 'off'
     for(int i=0; i<LED_COUNT1; i++) 
     {
       // Set the i-th LED to PURPLE:
@@ -185,6 +199,8 @@ void program_main_analogue()
       strip.show();   // Send the updated pixel colors to the hardware.
       delay(gr_bl_delay); // Pause before next pass through loop
     }
+    //Serial.print("PURPLE ");
+    //Serial.println(temp);
     delay(wait1);
     for(int i=LED_COUNT1; i<LED_COUNT2; i++) 
     {
@@ -201,11 +217,11 @@ void program_main_analogue()
   {
     //strip.clear(); // Set all pixel colors to 'off'
     //strip.show();   // Send the updated pixel colors to the hardware.
-    strip.setBrightness(255); // Set BRIGHTNESS (max = 255)
+    strip.setBrightness(100); // Set BRIGHTNESS (max = 255)
     for(int i=0; i<9; i++) 
         {
           // Set the i-th LED to white:
-          strip.setPixelColor(i, 30, 30, 30);
+          strip.setPixelColor(i, 255, 255, 255);
           strip.show();   // Send the updated pixel colors to the hardware.
           //delay(10); // Pause before next pass through loop
         }
